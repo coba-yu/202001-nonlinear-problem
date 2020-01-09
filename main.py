@@ -31,8 +31,12 @@ class Problem1(Problem):
 
 if __name__ == '__main__':
     out_dir = '../report_tex'
+
+    # Problem 1
     for i, epsilon in enumerate([0.05, 0.1, 0.3, 1.0]):
-        p1 = Problem1(0.05, 4000, epsilon, 0.1, 0.1)
+        h = 0.05
+        n_iter = 4000
+        p1 = Problem1(h, n_iter, epsilon, 0.1, 0.1)
         rk = RungeKutta(p1.h, p1.n_iter, p1.dxdt, p1.dydt, p1.x0, p1.y0)
         rk.solve()
         x, y = rk.get_output()
@@ -55,4 +59,4 @@ if __name__ == '__main__':
         plt.title(u'$t$-$\dot{x}$')
         plt.xlabel(u'$t$')
         plt.ylabel(u'$\dot{x}$')
-        plt.savefig(os.path.join(out_dir, f'problem1_{i}.eps'))
+        plt.savefig(os.path.join(out_dir, f'problem1_{i}.eps'), dpi=300)

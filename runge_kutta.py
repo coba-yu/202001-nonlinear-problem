@@ -43,16 +43,16 @@ class RungeKutta:
         xt = xs[0]
         yt = ys[0]
         for _ in range(self.n_iter):
-            a1 = dxdt(xt, yt) * h
-            b1 = dydt(xt, yt) * h
-            a2 = dxdt(xt + 0.5 * a1, yt + 0.5 * b1) * h
-            b2 = dydt(xt + 0.5 * a1, yt + 0.5 * b1) * h
-            a3 = dxdt(xt + 0.5 * a2, yt + 0.5 * b2) * h
-            b3 = dydt(xt + 0.5 * a2, yt + 0.5 * b2) * h
-            a4 = dxdt(xt + a3, yt + b3) * h
-            b4 = dydt(xt + a3, yt + b3) * h
-            xt = (a1 + 2 * a2 + 2 * a3 + a4) / 6
-            yt = (b1 + 2 * b2 + 2 * b3 + b4) / 6
+            a1 = dxdt(xt, yt)
+            b1 = dydt(xt, yt)
+            a2 = dxdt(xt + 0.5 * h * a1, yt + 0.5 * h * b1)
+            b2 = dydt(xt + 0.5 * h * a1, yt + 0.5 * h * b1)
+            a3 = dxdt(xt + 0.5 * h * a2, yt + 0.5 * h * b2)
+            b3 = dydt(xt + 0.5 * h * a2, yt + 0.5 * h * b2)
+            a4 = dxdt(xt + h * a3, yt + h * b3)
+            b4 = dydt(xt + h * a3, yt + h * b3)
+            xt += (a1 + 2 * a2 + 2 * a3 + a4) * h / 6
+            yt += (b1 + 2 * b2 + 2 * b3 + b4) * h / 6
             xs.append(xt)
             ys.append(yt)
 
